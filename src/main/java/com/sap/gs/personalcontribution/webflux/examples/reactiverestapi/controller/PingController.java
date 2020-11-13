@@ -9,7 +9,8 @@ import reactor.core.publisher.Mono;
 
 @Component
 public class PingController {
-    public Mono<ServerResponse> hello(ServerRequest request) {
+    public Mono<ServerResponse> ping(ServerRequest request) {
+        System.out.println("Ping received!");
         return ServerResponse.ok().contentType(MediaType.TEXT_PLAIN)
                 .body(BodyInserters.fromValue("pong!"));
     }
