@@ -1,4 +1,4 @@
-package com.sap.gs.personalcontribution.webflux.examples;
+package com.sap.gs.personalcontribution.webflux;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
