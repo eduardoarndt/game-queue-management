@@ -1,4 +1,4 @@
-package com.sap.gs.personalcontribution.webflux;
+package com.sap.gssi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

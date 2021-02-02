@@ -48,7 +48,7 @@
                             <goal>repackage</goal>
                         </goals>
                         <configuration>
-                            <mainClass>com.sap.gs.personalcontribution.webflux.ExamplesApplication</mainClass>
+                            <mainClass>com.sap.gssi.ExamplesApplication</mainClass>
                             <excludeDevtools>true</excludeDevtools>
                         </configuration>
                     </execution>
