@@ -1,6 +1,4 @@
-package com.sap.gssi.usecase;
-
-import com.sap.gssi.domain.Player;
+package com.sap.gssi.domain;
 
 import java.util.List;
 
@@ -8,9 +6,14 @@ public class GameSession {
     String gameName;
     Boolean started;
     Boolean finished;
-    List<Turn> turn;
+    Turn turn;
+    List<Player> players;
 
-    public GameSession(String gameName, Boolean started, Boolean finished, List<Turn> turn) {
+    public GameSession(String gameName) {
+        this.gameName = gameName;
+    }
+
+    public GameSession(String gameName, Boolean started, Boolean finished, Turn turn) {
         this.gameName = gameName;
         this.started = started;
         this.finished = finished;
@@ -41,24 +44,28 @@ public class GameSession {
         finished = ended;
     }
 
-    public List<Turn> getTurns() {
+    public Turn getTurn() {
         return turn;
     }
 
-    public void setTurns(List<Turn> turn) {
+    public void setTurn(Turn turn) {
         this.turn = turn;
     }
 
-    void addPlayers(List<Player> playerList) {
-
+    public Boolean getFinished() {
+        return finished;
     }
 
-    void orderPlayers(List<Player> playerList) {
-
+    public void setFinished(Boolean finished) {
+        this.finished = finished;
     }
 
-    void keepRecord(List<Player> playerList) {
+    public List<Player> getPlayers() {
+        return players;
+    }
 
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 
     @Override

@@ -1,6 +1,4 @@
-package com.sap.gssi.usecase;
-
-import com.sap.gssi.domain.Player;
+package com.sap.gssi.domain;
 
 public class Turn {
     Player current;
@@ -25,19 +23,6 @@ public class Turn {
 
     public void setNext(Player next) {
         this.next = next;
-    }
-
-
-    void skip(Player player) {
-
-    }
-
-    void playAgain(Player player) {
-
-    }
-
-    void reverseOrder(Player player) {
-
     }
 
     @Override
