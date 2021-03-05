@@ -1,9 +1,12 @@
 package com.sap.gssi.service;
 
 import com.sap.gssi.domain.GameSession;
+import com.sap.gssi.domain.Player;
 import com.sap.gssi.repository.IGameSessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class GameService {
@@ -20,4 +23,12 @@ public class GameService {
         this.gameSessionRepository.addGameSession(gameSession);
     }
 
+    public GameSession retrieveGameSession(String gameName) {
+        return this.gameSessionRepository.getGameSession(gameName);
+    }
+
+    public void addPlayersToGameSession(GameSession gameSession, List<Player> players) {
+        gameSession.setPlayers(players);
+        this.gameSessionRepository.addGameSession(gameSession);
+    }
 }
