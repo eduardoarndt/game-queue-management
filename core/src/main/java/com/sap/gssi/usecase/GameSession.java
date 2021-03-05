@@ -8,9 +8,9 @@ public class GameSession {
     String gameName;
     Boolean started;
     Boolean finished;
-    Turn turn; //verify with Lilian, this is not in the UML
+    List<Turn> turn;
 
-    public GameSession(String gameName, Boolean started, Boolean finished, Turn turn) {
+    public GameSession(String gameName, Boolean started, Boolean finished, List<Turn> turn) {
         this.gameName = gameName;
         this.started = started;
         this.finished = finished;
@@ -41,11 +41,11 @@ public class GameSession {
         finished = ended;
     }
 
-    public Turn getTurn() {
+    public List<Turn> getTurns() {
         return turn;
     }
 
-    public void setTurn(Turn turn) {
+    public void setTurns(List<Turn> turn) {
         this.turn = turn;
     }
 
