@@ -7,3 +7,5 @@ POST /${gameName}/players/add
 POST /${gameName}/start
 
 POST /${gameName}/finish
+
+GET /${gameName}/players // Flux!
