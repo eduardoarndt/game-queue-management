@@ -2,6 +2,7 @@ package com.sap.gssi.service;
 
 import com.sap.gssi.domain.GameSession;
 import com.sap.gssi.domain.Player;
+import com.sap.gssi.domain.Turn;
 import com.sap.gssi.repository.IGameSessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,10 @@ public class GameService {
     public void startGame(String gameName) {
         GameSession gameSession = this.retrieveGameSession(gameName);
         gameSession.setStarted(true);
+
+        List<Player> players = gameSession.getPlayers();
+        gameSession.setTurn(new Turn(players.get(0), players.get(1)));
+
         this.gameSessionRepository.updateGameSession(gameSession);
     }
 
