@@ -4,10 +4,8 @@ import com.sap.gssi.domain.Player;
 import com.sap.gssi.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
@@ -45,5 +43,10 @@ public class GameController {
     public Mono<String> finishGame(@PathVariable String gameName) {
         this.gameService.finishGame(gameName);
         return Mono.just("Game with name " + gameName + " finished");
+    }
+
+    @GetMapping(path = "/{gameName}/players")
+    public Flux<Player> getPlayers(@PathVariable String gameName) {
+        return this.gameService.getPlayers(gameName);
     }
 }
