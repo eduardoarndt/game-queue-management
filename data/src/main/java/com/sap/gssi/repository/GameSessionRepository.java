@@ -13,6 +13,10 @@ public class GameSessionRepository implements IGameSessionRepository {
     @Override
     public void addGameSession(GameSession gameSession) {
         gameSessions.put(gameSession.getGameName(), gameSession);
-        System.out.println("hash is:");
+    }
+
+    @Override
+    public GameSession getGameSession(String gameName) {
+        return gameSessions.get(gameName);
     }
 }

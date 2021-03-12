@@ -72,9 +72,10 @@ public class GameSession {
     public String toString() {
         return "GameSession{" +
                 "gameName='" + gameName + '\'' +
-                ", isStarted=" + started +
-                ", isEnded=" + finished +
+                ", started=" + started +
+                ", finished=" + finished +
                 ", turn=" + turn +
+                ", players=" + players +
                 '}';
     }
 }
