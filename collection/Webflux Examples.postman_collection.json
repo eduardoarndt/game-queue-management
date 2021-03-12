@@ -1,0 +1,115 @@
+{
+	"info": {
+		"_postman_id": "ffc907c3-b99f-4544-b83c-09a3147d07fc",
+		"name": "Webflux Examples",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create game",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/new/game/test",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"new",
+						"game",
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add players",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"name\": \"someone\",\r\n        \"birthDate\": \"1998-01-01\",\r\n        \"isAssociate\": true,\r\n        \"position\": 1,\r\n        \"isHost\": true\r\n    },\r\n    {\r\n        \"name\": \"someone 2\",\r\n        \"birthDate\": \"1998-01-01\",\r\n        \"isAssociate\": true,\r\n        \"position\": 1,\r\n        \"isHost\": true\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/test/players/add",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test",
+						"players",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "start game",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/test/start",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test",
+						"start"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "finish game",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/test/finish",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test",
+						"finish"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get players",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/test/players",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test",
+						"players"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
