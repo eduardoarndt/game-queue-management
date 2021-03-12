@@ -5,6 +5,7 @@ import com.sap.gssi.domain.Player;
 import com.sap.gssi.repository.IGameSessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 
 import java.util.List;
 
@@ -43,5 +44,10 @@ public class GameService {
         GameSession gameSession = this.retrieveGameSession(gameName);
         gameSession.setEnded(true);
         this.gameSessionRepository.updateGameSession(gameSession);
+    }
+
+    public Flux<Player> getPlayers(String gameName) {
+        GameSession gameSession = this.retrieveGameSession(gameName);
+        return Flux.fromIterable(gameSession.getPlayers());
     }
 }
