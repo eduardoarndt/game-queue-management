@@ -23,12 +23,25 @@ public class GameService {
         this.gameSessionRepository.addGameSession(gameSession);
     }
 
-    public GameSession retrieveGameSession(String gameName) {
+    private GameSession retrieveGameSession(String gameName) {
         return this.gameSessionRepository.getGameSession(gameName);
     }
 
-    public void addPlayersToGameSession(GameSession gameSession, List<Player> players) {
+    public void addPlayersToGameSession(String gameName, List<Player> players) {
+        GameSession gameSession = this.retrieveGameSession(gameName);
         gameSession.setPlayers(players);
-        this.gameSessionRepository.addGameSession(gameSession);
+        this.gameSessionRepository.updateGameSession(gameSession);
+    }
+
+    public void startGame(String gameName) {
+        GameSession gameSession = this.retrieveGameSession(gameName);
+        gameSession.setStarted(true);
+        this.gameSessionRepository.updateGameSession(gameSession);
+    }
+
+    public void finishGame(String gameName) {
+        GameSession gameSession = this.retrieveGameSession(gameName);
+        gameSession.setEnded(true);
+        this.gameSessionRepository.updateGameSession(gameSession);
     }
 }

@@ -16,6 +16,11 @@ public class GameSessionRepository implements IGameSessionRepository {
     }
 
     @Override
+    public void updateGameSession(GameSession gameSession) {
+        gameSessions.replace(gameSession.getGameName(), gameSession);
+    }
+
+    @Override
     public GameSession getGameSession(String gameName) {
         return gameSessions.get(gameName);
     }

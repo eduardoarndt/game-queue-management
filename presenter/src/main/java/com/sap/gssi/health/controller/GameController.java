@@ -1,6 +1,5 @@
 package com.sap.gssi.health.controller;
 
-import com.sap.gssi.domain.GameSession;
 import com.sap.gssi.domain.Player;
 import com.sap.gssi.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +31,19 @@ public class GameController {
     @PostMapping(path = "/{gameName}/players/add", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.TEXT_PLAIN_VALUE)
     public Mono<String> addPlayers(@PathVariable String gameName, @RequestBody List<Player> players) {
-        GameSession gameSession = this.gameService.retrieveGameSession(gameName);
-        this.gameService.addPlayersToGameSession(gameSession, players);
-
+        this.gameService.addPlayersToGameSession(gameName, players);
         return Mono.just("Added players to game " + gameName);
+    }
+
+    @PostMapping(path = "/{gameName}/start")
+    public Mono<String> startGame(@PathVariable String gameName) {
+        this.gameService.startGame(gameName);
+        return Mono.just("Game with name " + gameName + " started");
+    }
+
+    @PostMapping(path = "/{gameName}/finish")
+    public Mono<String> finishGame(@PathVariable String gameName) {
+        this.gameService.finishGame(gameName);
+        return Mono.just("Game with name " + gameName + " finished");
     }
 }
