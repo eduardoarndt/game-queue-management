@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -74,8 +75,17 @@ public class GameService {
         return Mono.just(gameSession.getTurn());
     }
 
+    public Mono<Turn> reverseGameTurn(String gameName) {
+        GameSession gameSession = this.retrieveGameSession(gameName);
+        List<Player> players = gameSession.getPlayers();
+        Collections.reverse(players);
+
+        this.setTurn(gameSession, players.get(0), players.get(1));
+
+        return Mono.just(gameSession.getTurn());
+    }
+
     private void setTurn(GameSession gameSession, Player current, Player next){
         gameSession.setTurn(new Turn(current, next));
     }
-
 }
