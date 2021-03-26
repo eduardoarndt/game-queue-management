@@ -51,6 +51,11 @@ public class GameController {
         return this.gameService.changeGameTurn(gameName);
     }
 
+    @PostMapping(path = "/{gameName}/turn/reverse")
+    public Mono<Turn> reverseGameTurn(@PathVariable String gameName) {
+        return this.gameService.reverseGameTurn(gameName);
+    }
+
     @GetMapping(path = "/{gameName}/players")
     public Flux<Player> getPlayers(@PathVariable String gameName) {
         return this.gameService.getPlayers(gameName);
