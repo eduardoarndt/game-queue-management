@@ -8,8 +8,8 @@ POST /${gameName}/start
 
 POST /${gameName}/finish
 
-POST /${gameName}/tun/change
+POST /${gameName}/turn/change
 
 GET /${gameName}/players // Flux!
 
-GET /${gameName}/tun
+GET /${gameName}/turn
