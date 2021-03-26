@@ -7,6 +7,7 @@ import com.sap.gssi.repository.IGameSessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class GameService {
         gameSession.setStarted(true);
 
         List<Player> players = gameSession.getPlayers();
-        gameSession.setTurn(new Turn(players.get(0), players.get(1)));
+        this.setTurn(gameSession, players.get(0), players.get(1));
 
         this.gameSessionRepository.updateGameSession(gameSession);
     }
@@ -55,4 +56,26 @@ public class GameService {
         GameSession gameSession = this.retrieveGameSession(gameName);
         return Flux.fromIterable(gameSession.getPlayers());
     }
+
+    public Mono<Turn> getGameTurn(String gameName) {
+        GameSession gameSession = this.retrieveGameSession(gameName);
+        return Mono.just(gameSession.getTurn());
+    }
+
+    public Mono<Turn> changeGameTurn(String gameName) {
+        GameSession gameSession = this.retrieveGameSession(gameName);
+        List<Player> players = gameSession.getPlayers();
+
+        players.add(players.get(0));
+        players.remove(0);
+
+        this.setTurn(gameSession, players.get(0), players.get(1));
+
+        return Mono.just(gameSession.getTurn());
+    }
+
+    private void setTurn(GameSession gameSession, Player current, Player next){
+        gameSession.setTurn(new Turn(current, next));
+    }
+
 }

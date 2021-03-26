@@ -1,6 +1,7 @@
 package com.sap.gssi.health.controller;
 
 import com.sap.gssi.domain.Player;
+import com.sap.gssi.domain.Turn;
 import com.sap.gssi.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -45,8 +46,18 @@ public class GameController {
         return Mono.just("Game with name " + gameName + " finished");
     }
 
+    @PostMapping(path = "/{gameName}/turn/change")
+    public Mono<Turn> changeGameTurn(@PathVariable String gameName) {
+        return this.gameService.changeGameTurn(gameName);
+    }
+
     @GetMapping(path = "/{gameName}/players")
     public Flux<Player> getPlayers(@PathVariable String gameName) {
         return this.gameService.getPlayers(gameName);
+    }
+
+    @GetMapping(path = "/{gameName}/turn")
+    public Mono<Turn> getGameTurn(@PathVariable String gameName) {
+        return this.gameService.getGameTurn(gameName);
     }
 }
