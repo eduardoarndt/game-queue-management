@@ -30,8 +30,8 @@ public class GameController {
     @PostMapping(path = "/{gameName}/players/add", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.TEXT_PLAIN_VALUE)
     public Mono<String> addPlayers(@PathVariable String gameName, @RequestBody List<Player> players) {
-        this.gameService.addPlayersToGameSession(gameName, players);
-        return Mono.just("Added players to game " + gameName);
+        return this.gameService.addPlayersToGameSession(gameName, players)
+                .thenReturn("Added players to game " + gameName);
     }
 
     @PostMapping(path = "/{gameName}/start")
@@ -54,6 +54,11 @@ public class GameController {
     @PostMapping(path = "/{gameName}/turn/reverse")
     public Mono<Turn> reverseGameTurn(@PathVariable String gameName) {
         return this.gameService.reverseGameTurn(gameName);
+    }
+
+    @PostMapping(path = "/{gameName}/turn/skip")
+    public Mono<Turn> skipGameTurn(@PathVariable String gameName) {
+        return this.gameService.skipGameTurn(gameName);
     }
 
     @GetMapping(path = "/{gameName}/players")
