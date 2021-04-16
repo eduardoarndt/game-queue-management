@@ -1,16 +1,22 @@
 package com.sap.gssi.repository;
 
 import com.sap.gssi.domain.GameSession;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameSessionRepositoryTest {
 
+    GameSessionRepository gameSessionRepository;
+
+    @BeforeEach
+    void beforeEach(){
+        gameSessionRepository = new GameSessionRepository();
+    }
+
     @Test
     void addGameSession() {
-        GameSessionRepository gameSessionRepository = new GameSessionRepository();
-
         GameSession expectedGameSession = new GameSession("test");
         gameSessionRepository.addGameSession(expectedGameSession);
 
@@ -21,8 +27,6 @@ class GameSessionRepositoryTest {
 
     @Test
     void updateGameSession() {
-        GameSessionRepository gameSessionRepository = new GameSessionRepository();
-
         GameSession firstGameSession = new GameSession("test");
         gameSessionRepository.addGameSession(firstGameSession);
 
@@ -37,8 +41,6 @@ class GameSessionRepositoryTest {
 
     @Test
     void getGameSession() {
-        GameSessionRepository gameSessionRepository = new GameSessionRepository();
-
         GameSession expectedGameSession = new GameSession("test");
         gameSessionRepository.addGameSession(expectedGameSession);
 
