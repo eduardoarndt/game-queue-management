@@ -23,27 +23,27 @@ public class GameController {
 
     @PostMapping(path = "/new/game/{gameName}")
     public Mono<String> addNewGame(@PathVariable String gameName) {
-        this.gameService.createNewGame(gameName);
-        return Mono.just("Game with name " + gameName + " created");
+        return this.gameService.createNewGame(gameName)
+                .thenReturn("Game with name " + gameName + " created");
     }
 
     @PostMapping(path = "/{gameName}/players/add", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.TEXT_PLAIN_VALUE)
     public Mono<String> addPlayers(@PathVariable String gameName, @RequestBody List<Player> players) {
-        this.gameService.addPlayersToGameSession(gameName, players);
-        return Mono.just("Added players to game " + gameName);
+        return this.gameService.addPlayersToGameSession(gameName, players)
+                .thenReturn("Added players to game " + gameName);
     }
 
     @PostMapping(path = "/{gameName}/start")
     public Mono<String> startGame(@PathVariable String gameName) {
-        this.gameService.startGame(gameName);
-        return Mono.just("Game with name " + gameName + " started");
+        return this.gameService.startGame(gameName)
+                .thenReturn("Game with name " + gameName + " started");
     }
 
     @PostMapping(path = "/{gameName}/finish")
     public Mono<String> finishGame(@PathVariable String gameName) {
-        this.gameService.finishGame(gameName);
-        return Mono.just("Game with name " + gameName + " finished");
+        return this.gameService.finishGame(gameName)
+                .thenReturn("Game with name " + gameName + " finished");
     }
 
     @PostMapping(path = "/{gameName}/turn/change")
@@ -54,6 +54,11 @@ public class GameController {
     @PostMapping(path = "/{gameName}/turn/reverse")
     public Mono<Turn> reverseGameTurn(@PathVariable String gameName) {
         return this.gameService.reverseGameTurn(gameName);
+    }
+
+    @PostMapping(path = "/{gameName}/turn/skip")
+    public Mono<Turn> skipGameTurn(@PathVariable String gameName) {
+        return this.gameService.skipGameTurn(gameName);
     }
 
     @GetMapping(path = "/{gameName}/players")
