@@ -36,14 +36,6 @@ public class GameSession {
         this.started = started;
     }
 
-    public Boolean getEnded() {
-        return finished;
-    }
-
-    public void setEnded(Boolean ended) {
-        finished = ended;
-    }
-
     public Turn getTurn() {
         return turn;
     }

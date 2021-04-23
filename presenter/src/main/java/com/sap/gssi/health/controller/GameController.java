@@ -1,5 +1,6 @@
 package com.sap.gssi.health.controller;
 
+import com.sap.gssi.domain.GameSession;
 import com.sap.gssi.domain.Player;
 import com.sap.gssi.domain.Turn;
 import com.sap.gssi.service.GameService;
@@ -22,28 +23,24 @@ public class GameController {
     }
 
     @PostMapping(path = "/new/game/{gameName}")
-    public Mono<String> addNewGame(@PathVariable String gameName) {
-        return this.gameService.createNewGame(gameName)
-                .thenReturn("Game with name " + gameName + " created");
+    public Mono<GameSession> addNewGame(@PathVariable String gameName) {
+        return this.gameService.createNewGame(gameName);
     }
 
     @PostMapping(path = "/{gameName}/players/add", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.TEXT_PLAIN_VALUE)
-    public Mono<String> addPlayers(@PathVariable String gameName, @RequestBody List<Player> players) {
-        return this.gameService.addPlayersToGameSession(gameName, players)
-                .thenReturn("Added players to game " + gameName);
+    public Mono<GameSession> addPlayers(@PathVariable String gameName, @RequestBody List<Player> players) {
+        return this.gameService.addPlayersToGameSession(gameName, players);
     }
 
     @PostMapping(path = "/{gameName}/start")
-    public Mono<String> startGame(@PathVariable String gameName) {
-        return this.gameService.startGame(gameName)
-                .thenReturn("Game with name " + gameName + " started");
+    public Mono<GameSession> startGame(@PathVariable String gameName) {
+        return this.gameService.startGame(gameName);
     }
 
     @PostMapping(path = "/{gameName}/finish")
-    public Mono<String> finishGame(@PathVariable String gameName) {
-        return this.gameService.finishGame(gameName)
-                .thenReturn("Game with name " + gameName + " finished");
+    public Mono<GameSession> finishGame(@PathVariable String gameName) {
+        return this.gameService.finishGame(gameName);
     }
 
     @PostMapping(path = "/{gameName}/turn/change")
