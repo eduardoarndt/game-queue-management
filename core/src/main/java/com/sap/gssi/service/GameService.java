@@ -28,10 +28,6 @@ public class GameService {
         return Mono.empty();
     }
 
-    private Mono<GameSession> retrieveGameSession(String gameName) {
-        return Mono.just(this.gameSessionRepository.getGameSession(gameName));
-    }
-
     public Mono<Void> addPlayersToGameSession(String gameName, List<Player> players) {
         return this.retrieveGameSession(gameName).map(gameSession -> {
             gameSession.setPlayers(players);
@@ -103,6 +99,10 @@ public class GameService {
             this.setTurn(gameSession, players.get(0), players.get(1));
             return gameSession.getTurn();
         });
+    }
+
+    private Mono<GameSession> retrieveGameSession(String gameName) {
+        return Mono.just(this.gameSessionRepository.getGameSession(gameName));
     }
 
     private Mono<Void> setTurn(GameSession gameSession, Player current, Player next) {
