@@ -22,25 +22,21 @@ public class GameService {
         this.gameSessionRepository = gameSessionRepository;
     }
 
-    public Mono<Void> createNewGame(String gameName) {
+    public Mono<GameSession> createNewGame(String gameName) {
         GameSession gameSession = new GameSession(gameName);
         this.gameSessionRepository.addGameSession(gameSession);
-        return Mono.empty();
+        return Mono.just(gameSession);
     }
 
-    private Mono<GameSession> retrieveGameSession(String gameName) {
-        return Mono.just(this.gameSessionRepository.getGameSession(gameName));
-    }
-
-    public Mono<Void> addPlayersToGameSession(String gameName, List<Player> players) {
+    public Mono<GameSession> addPlayersToGameSession(String gameName, List<Player> players) {
         return this.retrieveGameSession(gameName).map(gameSession -> {
             gameSession.setPlayers(players);
             this.gameSessionRepository.updateGameSession(gameSession);
             return gameSession;
-        }).then();
+        });
     }
 
-    public Mono<Void> startGame(String gameName) {
+    public Mono<GameSession> startGame(String gameName) {
         return this.retrieveGameSession(gameName).map(gameSession -> {
             gameSession.setStarted(true);
 
@@ -50,15 +46,15 @@ public class GameService {
             this.gameSessionRepository.updateGameSession(gameSession);
 
             return gameSession;
-        }).then();
+        });
     }
 
-    public Mono<Void> finishGame(String gameName) {
+    public Mono<GameSession> finishGame(String gameName) {
         return this.retrieveGameSession(gameName).map(gameSession -> {
-            gameSession.setEnded(true);
+            gameSession.setFinished(true);
             this.gameSessionRepository.updateGameSession(gameSession);
             return gameSession;
-        }).then();
+        });
     }
 
     public Flux<Player> getPlayers(String gameName) {
@@ -77,6 +73,7 @@ public class GameService {
             players.remove(0);
 
             this.setTurn(gameSession, players.get(0), players.get(1));
+            this.gameSessionRepository.updateGameSession(gameSession);
             return gameSession.getTurn();
         });
     }
@@ -87,6 +84,7 @@ public class GameService {
             Collections.reverse(players);
 
             this.setTurn(gameSession, players.get(0), players.get(1));
+            this.gameSessionRepository.updateGameSession(gameSession);
             return gameSession.getTurn();
         });
     }
@@ -101,8 +99,13 @@ public class GameService {
             }
 
             this.setTurn(gameSession, players.get(0), players.get(1));
+            this.gameSessionRepository.updateGameSession(gameSession);
             return gameSession.getTurn();
         });
+    }
+
+    private Mono<GameSession> retrieveGameSession(String gameName) {
+        return Mono.just(this.gameSessionRepository.getGameSession(gameName));
     }
 
     private Mono<Void> setTurn(GameSession gameSession, Player current, Player next) {
