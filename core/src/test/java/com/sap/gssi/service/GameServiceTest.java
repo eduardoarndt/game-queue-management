@@ -11,8 +11,7 @@ import reactor.test.StepVerifier;
 
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class GameServiceTest {
 
@@ -28,7 +27,12 @@ class GameServiceTest {
 
     @Test
     void createNewGame() {
-        StepVerifier.create(gameService.createNewGame(GAME_SESSION_NAME)).verifyComplete();
+        GameSession gameSession = new GameSession(GAME_SESSION_NAME);
+
+        StepVerifier.create(gameService.createNewGame(GAME_SESSION_NAME)).consumeNextWith(actualGameSession -> {
+            assertEquals(gameSession, actualGameSession);
+        }).verifyComplete();
+
         Mockito.verify(gameSessionRepository, Mockito.times(1))
                 .addGameSession(Mockito.any(GameSession.class));
     }
@@ -42,10 +46,13 @@ class GameServiceTest {
                 new Player("Player", new Date(), true, 2, false));
 
         StepVerifier.create(gameService.addPlayersToGameSession(GAME_SESSION_NAME, players))
+                .consumeNextWith(actualGameSession -> {
+                    assertSame(actualGameSession.getPlayers(), players);
+                })
                 .verifyComplete();
 
         Mockito.verify(gameSessionRepository, Mockito.times(1))
-                .addGameSession(Mockito.any(GameSession.class));
+                .updateGameSession(Mockito.any(GameSession.class));
     }
 
     @Test
