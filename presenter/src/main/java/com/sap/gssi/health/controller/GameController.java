@@ -27,8 +27,7 @@ public class GameController {
         return this.gameService.createNewGame(gameName);
     }
 
-    @PostMapping(path = "/{gameName}/players/add", consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.TEXT_PLAIN_VALUE)
+    @PostMapping(path = "/{gameName}/players/add")
     public Mono<GameSession> addPlayers(@PathVariable String gameName, @RequestBody List<Player> players) {
         return this.gameService.addPlayersToGameSession(gameName, players);
     }
