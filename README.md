@@ -20,7 +20,7 @@ POST /${gameName}/finish
 
 POST /${gameName}/turn/change
 
-GET /${gameName}/players // Flux!
+GET /${gameName}/players
 
 GET /${gameName}/turn
 ```
