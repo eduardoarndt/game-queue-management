@@ -1,5 +1,4 @@
-Endpoints to be implemented to control the game:
-
+```
 POST /new/game/${gameName}
 
 POST /${gameName}/players/add
@@ -13,3 +12,4 @@ POST /${gameName}/turn/change
 GET /${gameName}/players // Flux!
 
 GET /${gameName}/turn
+```
