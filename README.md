@@ -1,3 +1,10 @@
+Run
+```
+mvn install
+mvn spring-boot:run
+```
+
+Endpoints
 ```
 POST /new/game/${gameName}
 
