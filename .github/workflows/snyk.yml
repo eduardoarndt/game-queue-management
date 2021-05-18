@@ -9,6 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
+      
+      - name: Access to file
+      - run: git update-index --chmod=+x mvnw
+      
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/maven@master
         env:
