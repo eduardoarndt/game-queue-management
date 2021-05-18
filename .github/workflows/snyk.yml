@@ -9,8 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
+      
       - name: Access to file
         run: git update-index --chmod=+x mvnw
+        
+      - name: Dependency tree
+        run: ./mvnw dependency:tree -DoutputType=dot --file="pom.xml"
       
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/maven@master
