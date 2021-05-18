@@ -14,7 +14,7 @@ jobs:
         run: git update-index --chmod=+x mvnw
         
       - name: Dependency tree
-        run: ./mvnw dependency:tree -DoutputType=dot --file="pom.xml"
+        run: mvn dependency:tree -DoutputType=dot --file="pom.xml"
       
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/maven@master
