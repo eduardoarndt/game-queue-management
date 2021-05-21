@@ -18,6 +18,12 @@ jobs:
         distribution: 'adopt'
     - name: Build with Maven
       run: mvn -B -q install
+      
+  store-artifacts:
+    if: always()
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
     - run: mkdir staging && cp app/target/*.jar staging
     - uses: actions/upload-artifact@v2
       with:
