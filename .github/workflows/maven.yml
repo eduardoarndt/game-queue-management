@@ -18,13 +18,20 @@ jobs:
         distribution: 'adopt'
     - name: Build with Maven
       run: mvn -B -q install
-    - run: mkdir staging && cp app/target/*.jar staging
+    - name: Store application artifact
+      run: |
+        mkdir staging
+        cp app/target/*.jar staging
     - uses: actions/upload-artifact@v2
       with:
         name: Package
         path: staging
-    - run: mvn surefire-report:report-only && mvn site -DgenerateReports=false
-    - run: mkdir test-report && cp -R app/target/site test-report
+    - name: Store test report
+      run: |
+        mvn surefire-report:report-only
+        mvn site -DgenerateReports=false
+        mkdir test-report
+        cp -R app/target/site test-report
     - uses: actions/upload-artifact@v2
       with:
         name: Test report
