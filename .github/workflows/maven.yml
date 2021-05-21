@@ -24,7 +24,7 @@ jobs:
         name: Package
         path: staging
     - run: mvn surefire-report:report-only && mvn site -DgenerateReports=false
-    - run: mkdir test-report && cp app/target/site test-report
+    - run: mkdir test-report && cp -R app/target/site test-report
     - uses: actions/upload-artifact@v2
       with:
         name: Test report
