@@ -31,8 +31,10 @@ jobs:
         mvn surefire-report:report-only
         mvn site -DgenerateReports=false
         mkdir test-report
-        ls
         cp -R app/target/site test-report
+        cp -R core/target/site test-report
+        cp -R data/target/site test-report
+        cp -R presenter/target/site test-report
     - uses: actions/upload-artifact@v2
       with:
         name: Test report
