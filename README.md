@@ -1,14 +1,14 @@
 # spring-webflux-example
 
-Application made with learnings objectives. See [spring-webflux-study](https://github.com/pachecoka/spring-webflux-study).
+Application made to learn reactive programming. See [spring-webflux-study](https://github.com/pachecoka/spring-webflux-study) for a documentation on the topic :)
 
-## Build and run
+## How to build and run
 ```
 mvn install
 mvn spring-boot:run
 ```
 
-## Endpoints
+## API
 ```
 POST /new/game/${gameName}
 
