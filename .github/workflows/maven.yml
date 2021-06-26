@@ -30,12 +30,12 @@ jobs:
       run: |
         mvn surefire-report:report-only
         mvn site -DgenerateReports=false
+        mkdir test-report
         mkdir test-report-app
         mkdir test-report-core
         mkdir test-report-data
         mkdir test-report-presenter
-        cd target && ls
-        cd ..
+        cp -R target/site test-report
         cp -R app/target/site test-report-app
         cp -R core/target/site test-report-core
         cp -R data/target/site test-report-data
