@@ -30,17 +30,19 @@ jobs:
       run: |
         mvn surefire-report:report-only
         mvn site -DgenerateReports=false
-        mkdir test-report
         mkdir test-report-app
         mkdir test-report-core
         mkdir test-report-data
         mkdir test-report-presenter
-        cp -R target/site test-report
         cp -R app/target/site test-report-app
         cp -R core/target/site test-report-core
         cp -R data/target/site test-report-data
         cp -R presenter/target/site test-report-presenter
     - uses: actions/upload-artifact@v2
       with:
-        name: Test report
-        path: test-report
+        name: Test report app
+        path: test-report-app
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Test report core
+        path: test-report-core
