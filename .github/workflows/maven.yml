@@ -46,3 +46,11 @@ jobs:
       with:
         name: Test report core
         path: test-report-core
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Test report data
+        path: test-report-data
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Test report presenter
+        path: test-report-presenter
