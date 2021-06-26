@@ -29,7 +29,7 @@ jobs:
     - name: Store test report
       run: |
         mvn surefire-report:report -Daggregate=true
-        mvn site -DgenerateReports=false
+        mvn site
         mkdir test-report
         cp -R app/target/site test-report
     - uses: actions/upload-artifact@v2
