@@ -30,6 +30,8 @@ jobs:
       run: |
         mvn surefire-report:report-only
         mvn site -DgenerateReports=false
+        mvn verify site
+        mvn site:site site:stage
         mkdir test-report
         cp -R app/target/site test-report
     - uses: actions/upload-artifact@v2
