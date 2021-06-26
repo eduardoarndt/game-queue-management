@@ -28,10 +28,8 @@ jobs:
         path: staging
     - name: Store test report
       run: |
-        mvn surefire-report:report-only
+        mvn surefire-report:report -Daggregate=true
         mvn site -DgenerateReports=false
-        mvn verify site
-        mvn site:site site:stage
         mkdir test-report
         cp -R app/target/site test-report
     - uses: actions/upload-artifact@v2
