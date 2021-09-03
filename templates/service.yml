@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    cloud.google.com/neg: '{"ingress":true}'
+  creationTimestamp: "2021-09-03T20:34:11Z"
+  finalizers:
+    - service.kubernetes.io/load-balancer-cleanup
+  labels:
+    app: webflux-example
+  managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:app: {}
+        f:spec:
+          f:externalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":8080,"protocol":"TCP"}:
+              .: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector:
+            .: {}
+            f:app: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: GoogleCloudConsole
+      operation: Update
+      time: "2021-09-03T20:34:11Z"
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:finalizers:
+            .: {}
+            v:"service.kubernetes.io/load-balancer-cleanup": {}
+        f:status:
+          f:loadBalancer:
+            f:ingress: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2021-09-03T20:34:53Z"
+  name: webflux-example-service
+  namespace: default
+  resourceVersion: "9742"
+  uid: ec9a1096-d515-4f62-abbc-e9a700bbe3e9
+spec:
+  clusterIP: 10.8.128.64
+  clusterIPs:
+    - 10.8.128.64
+  externalTrafficPolicy: Cluster
+  ports:
+    - nodePort: 32195
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: webflux-example
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+      - ip: 35.238.197.220

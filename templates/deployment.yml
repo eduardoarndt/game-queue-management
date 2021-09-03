@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webflux-example
+spec:
+  selector:
+    matchLabels:
+      app: webflux-example
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: webflux-example
+    spec:
+      containers:
+        - name: webflux-example
+          image: eduardoarndt/webflux-example:latest
+          ports:
+            - containerPort: 8000
