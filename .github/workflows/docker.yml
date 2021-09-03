@@ -22,6 +22,4 @@ jobs:
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
-  gke:
-    runs-on: ubuntu-latest
-    # how to deploy to GKE?
+# how to deploy to GKE?
