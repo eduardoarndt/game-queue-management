@@ -9,6 +9,7 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@master
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
@@ -26,7 +27,6 @@ jobs:
           tags: eduardoarndt/webflux-example:latest
       - name: Start Application
         run: docker-compose up
-      - uses: actions/checkout@master
       - uses: matt-ball/newman-action@master
         with:
           collection: collection/webflux-examples.postman_collection.json
