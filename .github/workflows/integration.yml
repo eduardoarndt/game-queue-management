@@ -27,6 +27,7 @@ jobs:
           tags: eduardoarndt/webflux-example:latest
       - name: Start Application
         run: docker-compose up
-      - uses: matt-ball/newman-action@master
+      - name: Newman Tests
+        uses: matt-ball/newman-action@master
         with:
           collection: collection/webflux-examples.postman_collection.json
